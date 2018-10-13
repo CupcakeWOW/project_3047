@@ -1,0 +1,5 @@
+<table class="table">
+        <% persons.forEach( function(model) { %>
+            <tr><td><%= model.id %></td><td><a href="/person/update/<%= model.id %>"> <%= model.name %></a></td></tr>
+        <% }); %>
+    </table>

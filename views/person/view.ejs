@@ -1,0 +1,21 @@
+<table class="table">
+
+
+    <tr>
+        <td>
+            <%= person.name %>
+        </td>
+        <td>
+            <%= person.age %>
+        </td>
+    </tr>
+
+</table>
+
+
+
+<form method="POST" action="/person/delete/<%= person.id %>">
+
+    <input type="submit" name="delete" id="detele" value="delete">
+
+</form>

@@ -1,0 +1,84 @@
+<!--update.ejs-->
+<form action="/person/update/<%= person.id %>" method="POST">
+
+    <div class="form-group">
+        <label>Event Name</label>
+        <input type="text" class="form-control" value="<%= person.name %>" name="Person[name]" required>
+    </div>
+
+    <div class="form-group">
+        <label>Short Description</label>
+        <textarea class="form-control" value="<%= person.short_des %>" name="Person[short_des]" required>
+
+                <%= person.short_des %>
+                </textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Full Description</label>
+        <textarea class="form-control" value="<%= person.full_des %>" name="Person[full_des]" required>
+                <%= person.full_des %>
+                    </textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Image URL</label>
+        <input type="text" class="form-control" value="<%= person.img %>" name="Person[img]" required>
+    </div>
+
+    <div>
+        The original Organizer : <%= person.org %> 
+    </div>
+    <div class="form-group">
+        <label>Organizer</label>
+        <select class="form-control" name="Person[org]" required>
+            <option value="nan">Please select the Department</option>
+            <option value="Music">Department of Music</option>
+            <option value="computer">Department of computer Science</option>
+            <option value="history">Department of history</option>
+            <option value="biology">Department of biology</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Date</label>
+        <input type="date" class="form-control" value="<%= person.date %>" name="Person[date]" required>
+    </div>
+
+    <div class="form-group">
+        <label>Time</label>
+        <input type="time" class="form-control" value="<%= person.time %>" name="Person[time]" required>
+    </div>
+
+    <div>
+            The original Venue : <%= person.venue %> 
+        </div>
+    <div class="form-group">
+        <label>Venue</label>
+        <select class="form-control" name="Person[venue]" required>
+            <option value="nan">Please select the venue</option>
+            <option value="AC_hall">AC Hall</option>
+            <option value="AAB">AAB</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Quota</label>
+        <input type="number" class="form-control" value="<%= person.quota %>" name="Person[quota]" required>
+    </div>
+
+    <div class="form-group">
+
+            <label>Highlight Event</label>
+
+        <% if ( person.highlight == "true") { %>
+            <input type="checkbox"  name="Person[highlight]" checked="checked" value="true">
+       <% } else { %>
+       <input type="checkbox"  name="Person[highlight]" value="">
+       <% } %>
+        
+        
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
