@@ -71,14 +71,25 @@
 
             <label>Highlight Event</label>
 
-        <% if ( person.highlight == "true") { %>
-            <input type="checkbox"  name="Person[highlight]" checked="checked" value="true">
+        <% if ( person.highlight == "") { %>
+            <input type="checkbox"  name="Person[highlight]"  value="true">
        <% } else { %>
-       <input type="checkbox"  name="Person[highlight]" value="">
+       <input type="checkbox"  name="Person[highlight]" value="" hidden checked>
+       <input type="checkbox" checked name="Person[highlight]" value="true" >
        <% } %>
         
         
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+
+    
 </form>
+
+<br>
+<form method="POST" action="/person/delete/<%= person.id %>">
+
+        <input type="submit" name="delete" id="detele" value="Delete" class="btn btn-danger">
+    
+    </form>
+
