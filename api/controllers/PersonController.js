@@ -123,46 +123,42 @@ module.exports = {
                     highlight: "true",
                 }).fetch();
             }
-                if (models.length == 0) return res.notFound();
+            if (models.length == 0) return res.notFound();
 
-                return res.view('person/sucess');
+            return res.view('person/sucess');
 
-            }
-        },
-
-        // search function
-        search: async function (req, res) {
-
-            const qName = req.query.name || "";
-            const qAge = parseInt(req.query.age);
-
-            if (isNaN(qAge)) {
-
-                var persons = await Person.find({
-                    where: { name: { contains: qName } },
-                    sort: 'name'
-                });
-
-            } else {
-
-                var persons = await Person.find({
-                    where: { name: { contains: qName }, age: qAge },
-                    sort: 'name'
-                });
-
-            }
-
-            return res.view('person/index', { 'persons': persons });
-        },
-
-        // action - admin
-        admin: async function (req, res) {
-
-            var persons = await Person.find();
-            return res.view('person/admin', { 'persons': persons });
-
-        },
+        }
+    },
 
 
-    };
+
+
+
+    // search function
+    search: async function (req, res) {
+
+        var persons = await Person.find();
+        return res.view('person/search', { 'persons': persons });
+
+    },
+
+
+
+    // search result function 
+
+
+
+
+
+
+    // action - admin
+    admin: async function (req, res) {
+
+        var persons = await Person.find();
+        return res.view('person/admin', { 'persons': persons });
+
+    },
+
+
+};
 

@@ -1,21 +1,30 @@
-<!--index.ejs-->
+<div class="row">
 
-        <% persons.forEach( function(model) { %>
-        <%if (model.highlight == "true") { %>
-        <div class="card col-md-6">
-            <div class="row">
-                    <div class="col-md-12"><h4>
-                <a href="/person/view/<%= model.id %>">
-                    <%= model.name%></a></h4>
-                </div>
-                <div class="col-md-4 col-md-8" >
-                <img height="250" width="150" src=" <%= model.url %> ">
-                <%= model.short_des %>
-                </div>
+    <% persons.forEach( function(model) { %>
+    <%if (model.highlight == "true") { %>
+    <div class="card col-md-6">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    <a href="/person/view/<%= model.id %>">
+                        <%= model.name%></a></h4>
+            </div>
+
+
+            <div class="col-md-4">
+                <img height="250" width="150" src="<%= model.url %>">
+            </div>
+
+            <div class="col-md-8">
+                <%= model.sd%>
             </div>
         </div>
-<% } %>
-
-<% }); %>
 
 
+    </div>
+
+
+    <% } %>
+    <% }); %>
+</div>
