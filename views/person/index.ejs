@@ -1,8 +1,10 @@
 <div class="row">
 
     <% persons.forEach( function(model) { %>
-    <%if (model.highlight == "true") { %>
+      
+    <%if (model.highlight == "true"  ) { %>
     <div class="card col-md-6">
+    
 
         <div class="row">
             <div class="col-md-12">
@@ -17,7 +19,7 @@
             </div>
 
             <div class="col-md-8">
-                <%= model.sd%>
+                <%= model.short_des%>
             </div>
         </div>
 
@@ -25,6 +27,10 @@
     </div>
 
 
+
     <% } %>
+      
+
+
     <% }); %>
 </div>

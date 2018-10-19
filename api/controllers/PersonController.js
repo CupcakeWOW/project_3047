@@ -30,8 +30,8 @@ module.exports = {
         const numOfItemsPerPage = 2;
 
         var persons = await Person.find({
-            limit: numOfItemsPerPage,
-            skip: numOfItemsPerPage * qPage
+            limit: 4
+           
         });
 
         var numOfPage = Math.ceil(await Person.count() / numOfItemsPerPage);
@@ -145,7 +145,67 @@ module.exports = {
 
 
     // search result function 
+    search_result :async function (req, res) {
 
+        const qname = req.query.name || "";
+        const qorganizer = req.query.org || "";
+        const qvenue = req.query.venue || "";
+        const qSD = req.query.sdate || "";
+        const qED = req.query.edate || "";
+
+        console.log(qname, qorganizer, qvenue, qSD, qED)
+
+        const qPage = Math.max(req.query.page - 1, 0) || 0;
+
+        const numOfItemsPerPage = 2;
+        
+        if (qSD != "" && qED != ""){
+            var persons = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { "<=": qED, ">=": qSD } },
+                limit: numOfItemsPerPage,
+                skip: numOfItemsPerPage * qPage
+            })
+            var count = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { "<=": qED, ">=": qSD } },
+            })
+
+        } else if (qSD == "" && qED != "") {
+            var persons = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { "<=": qED } },
+                limit: numOfItemsPerPage,
+                skip: numOfItemsPerPage * qPage
+            })
+            var count = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { "<=": qED } },
+            })
+        } else if (qSD != "" && qED == "") {
+            var persons = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { ">=": qSD } },
+                limit: numOfItemsPerPage,
+                skip: numOfItemsPerPage * qPage
+            })
+            var count = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { ">=": qSD } },
+            })
+        } else {
+            var persons = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue } },
+                limit: numOfItemsPerPage,
+                skip: numOfItemsPerPage * qPage
+            })
+            var count = await Person.find({
+                where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue } },
+            })
+        }
+
+        console.log(persons)
+
+        var numOfPage = Math.ceil(await count.length / numOfItemsPerPage);
+
+        return res.view('person/search_result', { 'Persons': persons, 'count': numOfPage });
+
+
+    },
 
 
 

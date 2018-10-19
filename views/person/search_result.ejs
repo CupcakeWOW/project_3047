@@ -1,0 +1,97 @@
+<div class="row">
+
+    <div class="col-md-8">
+
+            <% const current = parseInt(req.query.page) || 1; %>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="/person/search_resultname=<%= req.query.name %>&org=<%= req.query.org %>&sdate=<%= req.query.sdate %>&edate=<%= req.query.edate %>&venue=<%= req.query.venue %>&page=<%= Math.max(current-1, 1) %>">Previous</a>
+                    </li>
+            
+                    <% for (i = 1; i <= count; i++) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="/person/search_result?name=<%= req.query.name %>&org=<%= req.query.org %>&sdate=<%= req.query.sdate %>&edate=<%= req.query.edate %>&venue=<%= req.query.venue %>&page=<%= i %>">
+                            <%= i %></a>
+                    </li>
+                    <% } %>
+            
+                    <li class="page-item">
+                        <a class="page-link" href="/person/search_result?name=<%= req.query.name %>&org=<%= req.query.org %>&sdate=<%= req.query.sdate %>&edate=<%= req.query.edate %>&venue=<%= req.query.venue %>&page=<%= Math.min(current+1, count) %>">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            
+            
+                    <!--paginate & reuslt-->
+            
+                   
+                        <% Persons.forEach( function(model) { %>
+                         <img height="250" width="300" src="<%= model.img %>">
+                         <table>
+                            <tr>
+                                <td>
+                                    <a href="/person/view/<%= model.id %>">
+                                        <%= model.name %></a><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <%= model.SD %>
+                                </td>
+                            </tr>
+                        </table>
+                        <% }); %>
+    
+    
+    </div>
+    
+        <div class="col-md-4">
+    
+                <form action="/person/search_result" method="GET">
+                    <div class="form-group">
+                        <label>Event Name</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+        
+        
+                    <div class="form-group">
+                        <label>Organizer</label>
+                        <select class="form-control" name="org">
+                            <option value="" selected disabled hidden>Please select the Department</option>
+                            <option value="Department of Music">Department of Music</option>
+                            <option value="Department of computer Science">Department of computer Science</option>
+                            <option value="Department of history">Department of history</option>
+                            <option value="Department of biology">Department of biology</option>
+                        </select>
+                    </div>
+        
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" name="sdate" id="datepicker">
+                    </div>
+        
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" name="edate" id="datepicker">
+                    </div>
+        
+        
+        
+                    <div class="form-group">
+                        <label>Venue</label>
+                        <select class="form-control" name="venue">
+                            <option value="" seleced disabled hidden>Please select the venue</option>
+                            <option value="AC_hall">AC Hall</option>
+                            <option value="AAB">AAB</option>
+                        </select>
+                    </div>
+        
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+    </div>
+    
+    
+    </div>
