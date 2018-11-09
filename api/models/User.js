@@ -23,6 +23,23 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+
+
+    username: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+
+    password: {
+      type: 'string'
+    },
+
+    usertype: {
+      type: 'string',
+      enum: ['admin', 'student','vistor'],
+      defaultsTo: 'vistor'
+    },
   },
 
 };

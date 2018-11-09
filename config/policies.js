@@ -16,7 +16,11 @@ module.exports.policies = {
   * (`true` allows public access)                                            *
   *                                                                          *
   ***************************************************************************/
+ PersonController: {
 
+  create: 'isAdmin'
+
+}
   // '*': true,
 
 };

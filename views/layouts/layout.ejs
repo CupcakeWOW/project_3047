@@ -39,6 +39,7 @@
 
 <div class="container">
 
+  
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Event System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
@@ -49,10 +50,27 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="/person/search">Search</a>
+        <% if (req.session.usertype == "admin") { %>
         <a class="nav-item nav-link" href="/person/create">Create</a>
         <a class="nav-item nav-link" href="/person/admin">Admin</a>
+        <% } else if (req.session.usertype == "student"){ %>
+          <a class="nav-item nav-link" href="#">Registerd Event</a>
+          <% } %>
       </div>
     </div>
+
+    
+    <div>HI. 
+<% if (req.session.usertype == "admin" || req.session.usertype == "student") { %>
+  <%= req.session.username %> (<a href="/user/logout">Logout</a>)
+  <% } else { %>
+    (<a href="/user/login">Login</a>)
+    <% } %>
+    
+     
+    
+    </div>
+
   </nav>
 
   <div class="jumbotron jumbotron-fluid">
