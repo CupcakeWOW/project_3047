@@ -42,12 +42,13 @@ module.exports.routes = {
   ***************************************************************************/
 
  'GET /person/view/:id': 'PersonController.view',
- 'POST /person/delete/:id': 'PersonController.delete',
+ 
  'POST /person/update/:id' : 'PersonController.update',
  'GET /person/update/:id' : 'PersonController.update',
  'GET /person/search_result/' : 'PersonController.search_result',       
  
- 
+ 'DELETE /person/:id': 'PersonController.delete',
+
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝

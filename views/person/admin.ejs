@@ -1,5 +1,65 @@
 <table class="table">
-        <% persons.forEach( function(model) { %>
-            <tr><td><%= model.id %></td><td><a href="/person/update/<%= model.id %>"> <%= model.name %></a></td></tr>
-        <% }); %>
-    </table>
+    
+    <tr>
+        <th>ID</th>
+        <th>Event</th>
+        <th>Organizer</th>
+        <th></th>
+    </tr>
+    
+    <% persons.forEach( function(model) { %>
+    <tr>
+        <td>
+            <%= model.id %>
+        </td>
+        <td><a href="/person/view/<%= model.id %>">
+                <%= model.name %></a></td>
+        <td>
+            <%= model.org %>
+        </td>
+        <td>
+            <a href="/person/update/<%= model.id %>" class="btn btn-warning">
+                Update</a>
+                
+            <a onclick="deletePerson('<%= model.id %>')"   class="btn btn-danger">
+                Delete</a>
+        </td>
+
+
+
+    </tr>
+    <% }); %>
+</table>
+
+<div id="deleteResult"></div>
+<script>
+
+    async function deletePerson(id) {
+
+        var dr = document.getElementById("deleteResult");
+
+        var r = confirm("Confirm Delete?");
+        if (r == true) {
+           
+            var response = await fetch("/person/" + id, { 
+               
+                method: "DELETE",
+                credentials: 'same-origin',
+            });
+            window.location.reload(this);
+            console.log(response);
+            
+            if (response.status == 200) {
+                var data = await response.json();
+                dr.innerHTML = data;
+            } else {
+                dr.innerHTML = response.statusText;
+            }
+
+        } else {
+            dr.innerHTML = "cancelled";
+        }
+
+    };
+
+</script>

@@ -16,8 +16,8 @@ module.exports.bootstrap = async function(done) {
 }
 
 await Person.createEach([
-  {"name":"event1","short_des":"this is short       ","full_des":"this is full                ","img":"https://sa.hkbu.edu.hk/f/ccl_event_file/4461/640p0/CCL18190082-20181011161500.jpg","org":"Department of Music","date":"2018-10-23","time":"12:44","venue":"AC_hall","quota":90,"highlight":"true"}
-
+  {"name":"event1","short_des":"this is short       ","full_des":"this is full                ","img":"https://sa.hkbu.edu.hk/f/ccl_event_file/4461/640p0/CCL18190082-20181011161500.jpg","org":"Department of Music","date":"2018-10-23","time":"12:44","venue":"AC_hall","quota":90,"highlight":"true"},
+  {"name":"event2","short_des":"this is short       ","full_des":"this is full                ","img":"https://sa.hkbu.edu.hk/f/ccl_event_file/4461/640p0/CCL18190082-20181011161500.jpg","org":"Department of Music","date":"2018-10-23","time":"12:44","venue":"AC_hall","quota":90,"highlight":"true"}
     // etc.
 ]);
 
