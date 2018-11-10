@@ -11,6 +11,22 @@
 
 module.exports.bootstrap = async function(done) {
 
+
+  sails.getInvalidIdMsg = function (opts) {
+
+    if (opts.id && isNaN(parseInt(opts.id))) {
+        return "Primary key specfied is invalid (incorrect type).";
+    }
+
+    if (opts.fk && isNaN(parseInt(opts.fk))) {
+        return "Foreign key specfied is invalid (incorrect type).";
+    }
+
+    return null;        // falsy
+
+}
+
+
   if (await Person.count() > 0) {
     return done();
 }
@@ -23,8 +39,8 @@ await Person.createEach([
 
 await User.createEach([
   { username : "admin", password : "123456", usertype : "admin"},
-  { username: "stu", password: "123456", usertype : "student"}
-  
+  { username: "stu1", password: "123456", usertype : "student"},
+  { username: "stu2", password: "123456", usertype : "student"}
   // etc.
 ]);
 
@@ -46,6 +62,21 @@ await User.createEach([
 
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
+
+
+
+
+  const event1 = await Person.findOne({name: "event1"});
+  const event2 = await Person.findOne({name: "event2"});
+  const admin = await User.findOne({username: "admin"});
+  const student1 = await User.findOne({username: "stu1"});
+  
+  await User.addToCollection(student1.id, 'supervises').members(event1.id);
+
+  await User.addToCollection(admin.id, 'supervises').members([student1.id, event1.id,event2.id]);
+
+
+
   return done();
 
 

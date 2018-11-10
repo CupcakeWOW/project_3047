@@ -55,7 +55,18 @@
                             <%= person.quota%>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <% if (req.session.usertype == "student") { %>
+                                <a href="/user/<%= req.session.uid %>/supervises/add/<%= person.id %>" class="btn btn-info">Register</a>
+                                <% } %>
+                                <%= req.session.uid %>
+                                <%= person.id %>
+                                
+                        </td>
+                    </tr>
                 </table>
+                
             </div>
         </div>
     </div>

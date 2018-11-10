@@ -55,6 +55,21 @@ module.exports = {
 
     },
 
+    // reg
+
+    reg: async function (req, res) {
+
+        var message = Person.getInvalidIdMsg(req.params);
+
+        if (message) return res.badRequest(message);
+
+        var model = await Person.findOne(req.params.id);
+
+        if (!model) return res.notFound();
+
+        return res.view('person/reg', { 'person': model });
+
+    },
     
     // action - delete 
     delete: async function (req, res) {
@@ -208,16 +223,30 @@ module.exports = {
 
     },
 
-
-
-
-
     // action - admin
     admin: async function (req, res) {
 
         var persons = await Person.find();
         return res.view('person/admin', { 'persons': persons });
 
+    },
+
+    //
+
+    populate: async function (req, res) {
+
+        if (!['worksFor'].includes(req.params.association)) return res.notFound();
+    
+        const message = sails.getInvalidIdMsg(req.params);
+    
+        if (message) return res.badRequest(message);
+    
+        var model = await Person.findOne(req.params.id).populate(req.params.association);
+    
+        if (!model) return res.notFound();
+    
+        return res.json(model);
+    
     },
 
 
