@@ -56,20 +56,8 @@ module.exports = {
     },
 
     // reg
-
-    reg: async function (req, res) {
-
-        var message = Person.getInvalidIdMsg(req.params);
-
-        if (message) return res.badRequest(message);
-
-        var model = await Person.findOne(req.params.id);
-
-        if (!model) return res.notFound();
-
-        return res.view('person/reg', { 'person': model });
-
-    },
+  
+  
     
     // action - delete 
     delete: async function (req, res) {
@@ -245,7 +233,9 @@ module.exports = {
     
         if (!model) return res.notFound();
     
-        return res.json(model);
+        console.log(model.worksFor);
+
+        return res.view('person/reg2', { 'person': model.worksFor });
     
     },
 
