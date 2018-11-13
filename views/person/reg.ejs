@@ -1,6 +1,18 @@
-<% pop1.forEach(function(model) { %>
+<div><h4>All registered Student</h4></div>
 
-    <%= model.username %>
-
-   
+<table class="table table-striped table-responsive-md">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    <% pop1.forEach(function(model) { %>
+    <tr>
+        <td>
+            <%= model.id %>
+        </td>
+        <td>
+            <%= model.username %>
+        </td>
+    </tr>
     <% }); %>
+</table>

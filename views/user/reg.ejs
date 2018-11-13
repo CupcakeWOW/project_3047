@@ -1,6 +1,51 @@
-<% pop2.forEach(function(model) { %>
+<h4>Your Registered Events</h4>
 
-    <%= model.name %>
+<div class="row">
+<% pop2.forEach( function (model) { %>
 
-   
-    <% }); %>
+    <div class="card col-md-4">
+
+        <div class="row">
+            <div class="col-md-12">
+                <img height="300" width="350" src=" <%= model.url %> ">
+
+                <div class="row">
+                    <div class="col-md-12">
+                            <a href="/person/view/<%= model.id %>">
+                        <%= model.name %></a>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <span style="font-weight:bold">Date: </span>
+                                    <%=model.date%>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span style="font-weight:bold">Time: </span>
+                                    <%=model.time%>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span style="font-weight:bold">Venue: </span>
+                                    <%= model.venue%>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <% }) %>

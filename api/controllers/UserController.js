@@ -95,16 +95,17 @@ module.exports = {
             if (!await Person.findOne(req.params.fk)) return res.notFound();
         }
 
-        await User.addToCollection(req.params.id, req.params.association).members(req.params.fk);
+         var model = await Person.findOne(req.params.fk);
 
+         await Person.update(req.params.fk).set({
+            quota: model.quota - 1,
+        }).fetch();
+
+        await User.addToCollection(req.params.id, req.params.association).members(req.params.fk);
+        
         //
         if (req.wantsJSON) {
-
-            
-
             return res.redirect('/');
-
-
         } else {
             return res.redirect('/');
         }
