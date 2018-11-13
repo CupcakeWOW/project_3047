@@ -128,6 +128,12 @@ module.exports = {
             if (!await Person.findOne(req.params.fk)) return res.notFound();
         }
 
+        var model = await Person.findOne(req.params.fk);
+
+        await Person.update(req.params.fk).set({
+           quota: model.quota + 1,
+       }).fetch();
+
         await User.removeFromCollection(req.params.id, req.params.association).members(req.params.fk);
 
         return res.redirect('/');

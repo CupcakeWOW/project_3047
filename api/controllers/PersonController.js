@@ -243,6 +243,8 @@ module.exports = {
 
         console.log(model.worksFor);
 
+
+
         return res.view('person/reg', {'pop1': model.worksFor});
 
         //return res.json({ 'test': model.worksFor });
