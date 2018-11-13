@@ -73,7 +73,7 @@ await User.createEach([
   const student2 = await User.findOne({username: "stu2"});
   
   await User.addToCollection(student1.id, 'supervises').members(event1.id);
-  await User.addToCollection(student2.id, 'supervises').members(event2.id);
+  await User.addToCollection(student2.id, 'supervises').members(event1.id);
  
 
 

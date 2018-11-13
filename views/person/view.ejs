@@ -57,6 +57,8 @@
                     </tr>
                     <tr>
                         <td>
+                           <% if ( person.quota != 0) { %>
+
                             <% if (req.session.usertype == "student") { %>
                             <% if (assco.supervises.length > 0) { %>
                             
@@ -64,6 +66,7 @@
                             <% } else { %>
                             
                             <a href="/user/<%= req.session.uid %>/supervises/add/<%= person.id %>" class="btn btn-info">Register</a>
+                            <% } %>
                             <% } %>
                             <% } %>
                         </td>
