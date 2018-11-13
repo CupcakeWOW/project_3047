@@ -31,7 +31,7 @@ module.exports = {
 
         var persons = await Person.find({
             limit: 4
-           
+
         });
 
         var numOfPage = Math.ceil(await Person.count() / numOfItemsPerPage);
@@ -49,16 +49,24 @@ module.exports = {
 
         var model = await Person.findOne(req.params.id);
 
+        if (req.session.usertype == "student") {
+
+            var assco = await User.findOne(req.session.uid).populate('supervises', { where: {id: req.params.id}});
+    
+            console.log(assco.supervises);
+    
+            }
+
         if (!model) return res.notFound();
 
-        return res.view('person/view', { 'person': model });
+        return res.view('person/view', { 'person': model, 'assco': assco });
 
     },
 
     // reg
-  
-  
-    
+
+
+
     // action - delete 
     delete: async function (req, res) {
 
@@ -149,7 +157,7 @@ module.exports = {
 
 
     // search result function 
-    search_result :async function (req, res) {
+    search_result: async function (req, res) {
 
         const qname = req.query.name || "";
         const qorganizer = req.query.org || "";
@@ -162,8 +170,8 @@ module.exports = {
         const qPage = Math.max(req.query.page - 1, 0) || 0;
 
         const numOfItemsPerPage = 2;
-        
-        if (qSD != "" && qED != ""){
+
+        if (qSD != "" && qED != "") {
             var persons = await Person.find({
                 where: { name: { contains: qname }, org: { contains: qorganizer }, venue: { contains: qvenue }, date: { "<=": qED, ">=": qSD } },
                 limit: numOfItemsPerPage,
@@ -224,19 +232,21 @@ module.exports = {
     populate: async function (req, res) {
 
         if (!['worksFor'].includes(req.params.association)) return res.notFound();
-    
-        const message = sails.getInvalidIdMsg(req.params);
-    
+
+        const message = Person.getInvalidIdMsg(req.params);
+
         if (message) return res.badRequest(message);
-    
+
         var model = await Person.findOne(req.params.id).populate(req.params.association);
-    
+
         if (!model) return res.notFound();
-    
+
         console.log(model.worksFor);
 
-        return res.view('person/reg2', { 'person': model.worksFor });
-    
+        return res.view('person/reg', {'pop1': model.worksFor});
+
+        //return res.json({ 'test': model.worksFor });
+
     },
 
 

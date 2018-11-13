@@ -14,7 +14,7 @@
                 <img height="500" width="400" src="<%= person.url %>">
             </div>
             <div class="col-md-7">
-                <table class="table" >
+                <table class="table">
                     <tr>
                         <td>
                             <%= person.full_des%>
@@ -58,19 +58,18 @@
                     <tr>
                         <td>
                             <% if (req.session.usertype == "student") { %>
-                                <a href="/user/<%= req.session.uid %>/supervises/add/<%= person.id %>" class="btn btn-info">Register</a>
-                                <% } %>
-                                <%= req.session.uid %>
-                                <%= person.id %>
-                                
-                                <% if (req.session.usertype == "student") { %>
-                                    <a href="/user/<%= req.session.uid %>/supervises/remove/<%= person.id %>" class="btn btn-danger">Cancel</a>
-
-                                    <% } %>
+                            <% if (assco.supervises.length > 0) { %>
+                            
+                            <a href="/user/<%= req.session.uid %>/supervises/remove/<%= person.id %>" class="btn btn-danger">Cancel</a>
+                            <% } else { %>
+                            
+                            <a href="/user/<%= req.session.uid %>/supervises/add/<%= person.id %>" class="btn btn-info">Register</a>
+                            <% } %>
+                            <% } %>
                         </td>
                     </tr>
                 </table>
-                
+
             </div>
         </div>
     </div>

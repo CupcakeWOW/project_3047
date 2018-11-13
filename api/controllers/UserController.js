@@ -65,7 +65,7 @@ module.exports = {
 
         if (!['supervises'].includes(req.params.association)) return res.notFound();
 
-        const message = sails.getInvalidIdMsg(req.params);
+        const message = Person.getInvalidIdMsg(req.params);
 
         if (message) return res.badRequest(message);
 
@@ -75,7 +75,7 @@ module.exports = {
 
         console.log(model.supervises);
 
-        return res.view('user/reg', { 'person': model });
+        return res.view('user/reg', { "pop2": model.supervises });
 
     },
 
