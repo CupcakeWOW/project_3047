@@ -30,13 +30,19 @@ module.exports = {
         const numOfItemsPerPage = 2;
 
         var persons = await Person.find({
-            limit: 4
-
-        });
+            limit: 4,
+       
+       });
 
         var numOfPage = Math.ceil(await Person.count() / numOfItemsPerPage);
 
-        return res.view('person/index', { 'persons': persons, 'count': numOfPage });
+        if (req.wantsJSON) {
+            // return res.redirect('/person/index');
+            return res.json({persons});
+         } else {
+            return res.view('person/index', { 'persons': persons, 'count': numOfPage });
+         }
+
 
     },
 
@@ -59,7 +65,13 @@ module.exports = {
 
         if (!model) return res.notFound();
 
-        return res.view('person/view', { 'person': model, 'assco': assco });
+        if (req.wantsJSON) {
+            // return res.redirect('/person/index');
+            return res.json({ 'person': model, 'assco': assco});
+         } else {
+            return res.view('person/view', { 'person': model, 'assco': assco });
+         }
+
 
     },
 
