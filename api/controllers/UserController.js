@@ -38,9 +38,8 @@ module.exports = {
 
             // return res.json(req.session);
 
-            if (req.wantsJSON) {
-               // return res.redirect('/person/index');
-               return res.json(err);
+            if (req.wantsJSON){
+                return res.redirect('/person/index');
             } else {
                 return res.ok("Login successfully");
             }
